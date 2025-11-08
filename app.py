@@ -99,7 +99,7 @@ def compute_macd(data):
 # ---- LIVE PRICE ----
 if not df.empty:
     current_price = df["Price"].iloc[-1]
-    st.markdown(f"<div style='text-align:center;margin-top:10px;'><span style='font-size:28px;color:#00FFAA;font-weight:600;'>💰 Current {pair} Price: {current_price:.5f}</span></div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='text-align:center;margin-top:10px;'><span style='font-size:28px;color:#00FFAA;font-weight:600;'>Current {pair} Price: {current_price:.5f}</span></div>", unsafe_allow_html=True)
 else:
     st.warning("⚠️ Unable to fetch live price.")
 
@@ -250,7 +250,7 @@ total_preds = int(verified_mask.sum())
 correct_preds = history.loc[verified_mask, "Was_Correct"].sum()
 true_acc = float(correct_preds) / total_preds if total_preds > 0 else 0.0
 accuracy_color = "lime" if true_acc >= 0.7 else "orange" if true_acc >= 0.5 else "red"
-st.markdown("### 📊 AI Model Performance Tracker")
+st.markdown("### AI Model Performance Tracker")
 st.progress(min(true_acc, 1.0))
 st.markdown(
     f"<b>Learned Accuracy:</b> <span style='color:{accuracy_color};'>{true_acc:.2%}</span> "
@@ -259,18 +259,18 @@ st.markdown(
 )
 
 # ---- LOG DISPLAY ----
-st.markdown("### 🧾 Prediction History")
+st.markdown("### Prediction History")
 st.dataframe(history.head(10), width="stretch", hide_index=True)
 
 # ---- EXPLANATION ----
-with st.expander("📘 How It Learns & Interprets Signals"):
+with st.expander("How It Learns & Interprets Signals"):
     st.markdown("""
-    ### 💹 How the AI Learns
+    ### How the AI Learns
     - Each signal is stored with timestamp and price.
     - After 3 new candles, the model checks if its prediction was right.
     - Once 20 verified signals are recorded, the model retrains automatically.
 
-    ### 🤖 What Improves Over Time
+    ### What Improves Over Time
     - Decision boundaries refine using real outcomes.
     - Confidence becomes better calibrated to actual results.
     - Accuracy % becomes a true measure of predictive reliability.
